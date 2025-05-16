@@ -1,0 +1,2 @@
+spring.mail.username=ifonsecap351@gmail.com
+spring.mail.password=eqok cyvf rltl kvqm 

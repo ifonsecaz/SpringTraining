@@ -46,7 +46,7 @@ public class AuthController {
     @Transactional
     @PostMapping("/register")
     public String registerUser(User user) {
-        if(user.getUsername()!=null && user.getPassword()!=null){
+        if(user.getUsername()!=null && user.getPassword()!=null && user.getEmail()!=null){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             Role aux= roleService.verifyRole("USER");
             System.out.println(aux.getRole_id());

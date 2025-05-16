@@ -1,5 +1,6 @@
 package com.security.useraccess.security;
 
+import com.security.useraccess.repository.UserRepository;
 import com.security.useraccess.security.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtils;
     @Autowired
     private CustomUserDetailsService userDetailsService;
+    @Autowired UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(
@@ -38,7 +40,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = userDetailsService.loadUserByUsername(username);
-            if (jwtUtils.validateJwtToken(token)) {
+            if (jwtUtils.validateJwtToken(token, userRepository.findByUsername(username).getLastPasswordReset())) {
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authToken);

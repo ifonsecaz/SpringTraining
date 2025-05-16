@@ -4,10 +4,11 @@ import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Component
 public class JwtUtil {
@@ -39,9 +40,19 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public boolean validateJwtToken(String token) {
+    public boolean validateJwtToken(String token, LocalDateTime lastPasswordReset) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            Claims claims =Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+
+            Date issuedAt = claims.getIssuedAt(); 
+
+            LocalDateTime issuedAtLocal = issuedAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            // If the token was issued BEFORE the password was reset, it's invalid
+            if (lastPasswordReset != null && issuedAtLocal.isBefore(lastPasswordReset)) {
+                System.out.println("JWT token was issued before password reset");
+                return false;
+            }
             return true;
         } catch (SecurityException e) {
             System.out.println("Invalid JWT signature: " + e.getMessage());

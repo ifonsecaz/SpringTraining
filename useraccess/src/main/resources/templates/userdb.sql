@@ -5,7 +5,11 @@ use userdb;
 create table user(
 	user_id bigint primary key auto_increment,
     username varchar(50) unique not null,
-    password varchar(100) not null
+    password varchar(100) not null,
+    last_password_reset Date,
+    otp varchar(6),
+    otp_expiry Date,
+    email varchar(100) not null
 );
 
 create table role(

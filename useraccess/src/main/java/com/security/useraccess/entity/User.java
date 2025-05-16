@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class User {
     @Id
@@ -22,13 +24,23 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore 
     private User_role role;
+    @Column(name = "last_password_reset")
+    private LocalDateTime lastPasswordReset;
+    @Column(name = "otp")
+    private String mfaOtp;
+    @Column(name = "otp_expiry")
+    private LocalDateTime mfaOtpExpiry;
+    @Column(nullable = false)
+    private String email;
 
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email=email;
+        lastPasswordReset=LocalDateTime.now();
     }
 
     public long getUser_id() {
@@ -43,12 +55,25 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email=email;
+    }
+
     public String getPassword() {
         return password;
     }
 
+    public LocalDateTime getLastPasswordReset(){
+        return lastPasswordReset;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+        lastPasswordReset=LocalDateTime.now();
     }
 
     public Role getRole(){
@@ -67,6 +92,22 @@ public class User {
         role.getRole().removeRelUser(role);
         this.role=null;
         return true;
+    }
+
+    public String getMfaOTP(){
+        return mfaOtp;
+    }
+
+    public void setMfaOtp(String mfaOtp){
+        this.mfaOtp=mfaOtp;
+    }
+
+    public LocalDateTime getMfaOtpExpiry(){
+        return mfaOtpExpiry;
+    }
+
+    public void setMfaOtpExpiry(LocalDateTime mfaOtpExpiry){
+        this.mfaOtpExpiry=mfaOtpExpiry;
     }
 
     @Override
