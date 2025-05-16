@@ -305,3 +305,7 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'prueba2' for
 	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
 
 2025-05-15T13:17:22.002-06:00  WARN 20080 --- [users] [http-nio-8081-exec-6] c.l.users.controller.UserController      : We couldn't find the id: 233
+2025-05-15T18:15:06.511-06:00  WARN 45212 --- [users] [main] c.zaxxer.hikari.util.DriverDataSource    : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2025-05-15T18:15:07.783-06:00  WARN 45212 --- [users] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-15T18:22:10.333-06:00  WARN 38256 --- [users] [main] c.zaxxer.hikari.util.DriverDataSource    : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2025-05-15T18:22:11.557-06:00  WARN 38256 --- [users] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
