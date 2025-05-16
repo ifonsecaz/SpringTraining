@@ -32,34 +32,63 @@ A Spring Boot application that implements a secure authentication system using J
 ## 📁 Project Structure
 
 src/
+
 ├── controller/
+
 │ ├── AuthApiController.java # Handles API login, register, OTP
+
 │ ├── ApiUserController.java # Password reset, user info
+
 │ ├── ApiAdminController.java # Admin user deletion
+
 │ ├── AuthController.java # Web form login/register
+
 │ └── UserController.java # Web admin delete
+
 ├── entity/
+
 │ ├── User.java
+
 │ ├── Role.java
+
 │ ├── User_role.java
+
 │ └── User_roleskey.java
+
 │ └── OtpVerificationRequest.java #Aux class for request body in OTP login
+
 │ └── PasswordResetRequest.java #Aux class for request body in password reset
+
 │ └── SimpleUser.java #Aux class for login request
+
 ├── security/
+
 │ ├── SecurityConfig.java # Two security filter chains, for JWT and form login
+
 │ └── AuthTokenFilter.java # JWT filter
+
 │ ├── EmailService.java #Method sendOtp, sends mail with otp code
+
 │ └── RateLimiterService.java # For resetpwd and login, using IP
+
 │ └── RoleService.java #Method to verify role
+
 │ └── JwtUtil.java #Methods to generate token, getUsernameFromToken, validateToken 
+
 │ └── EmailConfig.java #Configuration of JavaMailSender
+
 │ └── CustomUserDetailsService.java #Retrieves UserDetails : loadUserByUsername
+
 │ └── AuthEntryPointJwt.java
+
 ├── repository/
+
 │ └── RoleRepository.java #Function to add a Role
+
 │ └── UserRepository.java #Function to find user by username
+
 ├── UseraccessApplication.java
+
 ---
 
 ## 🛠️ Setup
@@ -69,18 +98,27 @@ src/
 MySQL configuration
 
 spring.datasource.url=jdbc:mysql://localhost:3306/userdb
+
 spring.datasource.username=root
+
 spring.datasource.password=admin
+
 spring.datasource.driverClassName=com.mysql.jdbc.Driver
+
 spring.jpa.hibernate.ddl-auto=update
 
 Email service configuration
 
 spring.mail.host=smtp.gmail.com
+
 spring.mail.port=587
+
 spring.mail.username=your_email@gmail.com
+
 spring.mail.password=Application password generated on gmail
+
 spring.mail.properties.mail.smtp.auth=true
+
 spring.mail.properties.mail.smtp.starttls.enable=true
 
 Secret key for JWT
