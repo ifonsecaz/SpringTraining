@@ -1,12 +1,14 @@
 package com.ecommerce.userservice.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.userservice.repository.UserRepository;
 import com.ecommerce.userservice.security.RateLimiterService;
@@ -19,11 +21,14 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import com.ecommerce.userservice.entity.User;
 import com.ecommerce.userservice.entity.EmailChangeRequest;
 import com.ecommerce.userservice.entity.PasswordResetRequest;
+import com.ecommerce.userservice.entity.ProductDTO;
 
 @RestController
 @RequestMapping("/api/users")
@@ -126,5 +131,26 @@ public class ApiUserController {
         
     }
 
+    //Need logic change
+    @PutMapping("/products/product/{id}/unitsbuy/{units}")
+    public ResponseEntity<?>
+    buyProduct(@PathVariable("id") Long productId,
+                        @PathVariable("units") int units)
+    {
+        final String uri = "http://localhost:8081/products/update/product/"+productId+"/unitsbuy/"+units;
+        RestTemplate restTemplate = new RestTemplate();
+        try{
+            return restTemplate.exchange(uri, HttpMethod.PUT, null, ProductDTO.class);
+        } catch (HttpClientErrorException | HttpServerErrorException ex) {
+            // Handle error response as String
+            String errorBody = ex.getResponseBodyAsString();
+            HttpStatusCode statusCode = ex.getStatusCode();
+
+            return ResponseEntity.status(statusCode).body(errorBody);
+        } catch (Exception ex) {
+            // Catch all other unexpected errors
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected error: " + ex.getMessage());
+        }
+    }
 
 }
