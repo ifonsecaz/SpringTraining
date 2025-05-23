@@ -1,7 +1,6 @@
 package com.task.manager.userservice.entity;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TaskDTO {
     private long task_id;
@@ -99,5 +98,5 @@ public class TaskDTO {
             "\ncreatedDate=" + createdDate +
             "\ndueDate=" + dueDate+
             '}';
-}
+    }
 }

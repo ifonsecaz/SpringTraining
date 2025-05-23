@@ -2,12 +2,8 @@ package com.task.manager.userservice.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.task.manager.userservice.entity.User;
@@ -15,14 +11,9 @@ import com.task.manager.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
-
-import com.task.manager.userservice.entity.EmailChangeRequest;
 import com.task.manager.userservice.entity.TaskDTO;
-
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
 @Service

@@ -7,8 +7,6 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import com.task.manager.userservice.entity.User;
 

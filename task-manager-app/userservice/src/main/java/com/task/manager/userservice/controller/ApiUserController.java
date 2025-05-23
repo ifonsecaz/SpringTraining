@@ -2,40 +2,23 @@ package com.task.manager.userservice.controller;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import com.task.manager.userservice.repository.UserRepository;
 import com.task.manager.userservice.service.EmailService;
 
-import io.github.bucket4j.Bucket;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import com.task.manager.userservice.entity.User;
 import com.task.manager.userservice.entity.UserDTO;
 import com.task.manager.userservice.entity.EmailChangeRequest;
 import com.task.manager.userservice.entity.PasswordResetRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 
 
 @RestController

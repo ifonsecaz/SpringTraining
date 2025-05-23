@@ -8,19 +8,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.task.manager.gatewayservice.entity.TaskCountDTO;
 import com.task.manager.gatewayservice.entity.TaskDTO;
-import com.task.manager.gatewayservice.security.JwtUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.net.URI;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-    @Autowired
-    private JwtUtil jwtUtils;
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
