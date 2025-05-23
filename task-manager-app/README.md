@@ -41,7 +41,8 @@ server.port=8761
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 
-### 🌐 gatewayservice
+### 🌐 `gatewayservice`
+```properties
 spring.application.name=gatewayservice
 server.port=8080
 jwt.secret=<JWT_SECRET>
@@ -52,8 +53,8 @@ spring.jpa.hibernate.ddl-auto=update
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 management.endpoints.web.exposure.include=health,info,metrics,prometheus
 
-### 👤 userservice
-
+### 👤 `userservice`
+```properties
 spring.application.name=userservice
 server.port=8081
 jwt.secret=<JWT_SECRET>
@@ -69,8 +70,8 @@ spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
-### 📝 taskservice
-
+### 📝 `taskservice`
+```properties
 spring.application.name=taskservice
 server.port=8082
 spring.datasource.url=jdbc:mysql://localhost:3306/taskman
@@ -80,8 +81,8 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 ---
 
-# ▶️ How to Run
-
+## ▶️ How to Run
+```properties
 1. Start the Eureka Registry (registryservice)
 
 2. Start the API Gateway (gatewayservice)
@@ -92,12 +93,12 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 ---
 
-# 🧪 API Usage
-
+## 🧪 API Usage
+```properties
 Base URL: http://localhost:8080
 
-## 👤 Auth & User
-
+### 👤 `Auth & User`
+```properties
 Register
 
 POST /api/auth/register
@@ -130,8 +131,8 @@ POST /api/auth/login
   "password": "password"
 }
 
-### 👤 User Endpoints (Requires Bearer Token)
-
+### `👤 User Endpoints (Requires Bearer Token)`
+```properties
 Get Info
 
 GET /api/user/info
@@ -155,8 +156,8 @@ POST /api/user/changemail
   "password": "password"
 }
 
-### 📝 Task Endpoints
-
+### 📝 `Task Endpoints`
+```properties
 Add Task
 
 POST /api/user/newtask
@@ -219,19 +220,19 @@ PUT /api/user/update-task/{id}
   "dueDate": "2025-06-20T12:00:00"
 }
 
-### 🔄 Task Pagination & Sorting
+## 🔄 Task Pagination & Sorting
 
-### 📄 Get Paginated Tasks (User-specific)
+### 📄 `Get Paginated Tasks (User-specific)`
 
 GET http://localhost:8080/api/user/tasklist/page?page=0&size=10&sortBy=createdDate&sortDir=asc
 
-### 📄 Get Paginated Tasks (All - Admin)
+### 📄 `Get Paginated Tasks (All - Admin)`
 
 GET http://localhost:8080/api/admin/tasklist/page?page=0&size=10&sortBy=createdDate&sortDir=asc
 
 
-### 🛡️ Admin Endpoints
-
+### 🛡️ `Admin Endpoints`
+```properties
 Delete User
 
 DELETE /api/admin/delete/{id}
@@ -250,8 +251,8 @@ GET    /api/admin/task-count
 
 DELETE /api/admin/delete-task/{id}
 
-### 📊 Monitoring & Actuator
-
+### 📊 `Monitoring & Actuator`
+```properties
 http://localhost:8080/actuator/health
 
 http://localhost:8080/actuator/info
@@ -260,8 +261,8 @@ http://localhost:8080/actuator/metrics
 
 http://localhost:8080/actuator/prometheus
 
-### 📒 Swagger Docs
-
+### 📒 `Swagger Docs`
+```properties
 Enable Swagger in gatewayservice, userservice, and taskservice to visualize and test endpoints.
 
 Gateway (aggregate): http://localhost:8080/swagger-ui/index.html
@@ -269,7 +270,7 @@ Gateway (aggregate): http://localhost:8080/swagger-ui/index.html
 User Service: http://localhost:8081/swagger-ui/index.html
 
 Task Service: http://localhost:8082/swagger-ui/index.html
-
+```
 ---
 
 The userservice is scheduled to automatically delete all non-verified users or revert to its original email if it is not verified. Also sends reminder email for nearly due to date tasks at 8:00 am every day, it considers tasks who expire next day and aren't marked as complete.
