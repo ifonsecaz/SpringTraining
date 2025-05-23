@@ -11,8 +11,8 @@ This is a **Task Manager** application developed using **Spring Boot** and a **m
 | `registryservice`| 8761 | Eureka Discovery Server for service registration and monitoring             |
 | `gatewayservice` | 8080 | API Gateway to route requests, validate JWT tokens                          |
 | `userservice`    | 8081 | Handles user registration, OTP login, authentication, and notifications     |
-| `taskservice`    | 8082 | Manages task-related operations like create, retrieve, update, delete.
-Supports task filtering, sorting, and pagination.                                             |
+| `taskservice`    | 8082 | Manages task-related operations like create, retrieve, update, delete.|
+|||Supports task filtering, sorting, and pagination.                                           |
 
 ---
 
@@ -41,7 +41,7 @@ server.port=8761
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 
-## 🌐 gatewayservice
+### 🌐 gatewayservice
 spring.application.name=gatewayservice
 server.port=8080
 jwt.secret=<JWT_SECRET>
@@ -52,7 +52,7 @@ spring.jpa.hibernate.ddl-auto=update
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 management.endpoints.web.exposure.include=health,info,metrics,prometheus
 
-## 👤 userservice
+### 👤 userservice
 
 spring.application.name=userservice
 server.port=8081
@@ -69,13 +69,16 @@ spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
-## 📝 taskservice
+### 📝 taskservice
+
 spring.application.name=taskservice
 server.port=8082
 spring.datasource.url=jdbc:mysql://localhost:3306/taskman
 spring.datasource.username=root
 spring.datasource.password=admin
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+---
 
 # ▶️ How to Run
 
@@ -86,6 +89,8 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 3. Start the User Service (userservice)
 
 4. Start the Task Service (taskservice)
+
+---
 
 # 🧪 API Usage
 
@@ -264,6 +269,8 @@ Gateway (aggregate): http://localhost:8080/swagger-ui/index.html
 User Service: http://localhost:8081/swagger-ui/index.html
 
 Task Service: http://localhost:8082/swagger-ui/index.html
+
+---
 
 The userservice is scheduled to automatically delete all non-verified users or revert to its original email if it is not verified. Also sends reminder email for nearly due to date tasks at 8:00 am every day, it considers tasks who expire next day and aren't marked as complete.
 
