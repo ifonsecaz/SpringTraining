@@ -40,7 +40,7 @@ spring.application.name=registryservice
 server.port=8761
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
-
+```
 ### 🌐 `gatewayservice`
 ```properties
 spring.application.name=gatewayservice
@@ -52,7 +52,7 @@ spring.datasource.password=admin
 spring.jpa.hibernate.ddl-auto=update
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 management.endpoints.web.exposure.include=health,info,metrics,prometheus
-
+```
 ### 👤 `userservice`
 ```properties
 spring.application.name=userservice
@@ -69,7 +69,7 @@ spring.mail.password=<EMAIL_PASSWORD>
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
-
+```
 ### 📝 `taskservice`
 ```properties
 spring.application.name=taskservice
@@ -78,7 +78,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/taskman
 spring.datasource.username=root
 spring.datasource.password=admin
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
-
+```
 ---
 
 ## ▶️ How to Run
@@ -90,13 +90,13 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 3. Start the User Service (userservice)
 
 4. Start the Task Service (taskservice)
-
+```
 ---
 
 ## 🧪 API Usage
 ```properties
 Base URL: http://localhost:8080
-
+```
 ### 👤 `Auth & User`
 ```properties
 Register
@@ -130,7 +130,7 @@ POST /api/auth/login
   "username": "test",
   "password": "password"
 }
-
+```
 ### `👤 User Endpoints (Requires Bearer Token)`
 ```properties
 Get Info
@@ -155,7 +155,7 @@ POST /api/user/changemail
   "email": "new@example.com",
   "password": "password"
 }
-
+```
 ### 📝 `Task Endpoints`
 ```properties
 Add Task
@@ -219,7 +219,7 @@ PUT /api/user/update-task/{id}
   "priority": "High",
   "dueDate": "2025-06-20T12:00:00"
 }
-
+```
 ## 🔄 Task Pagination & Sorting
 
 ### 📄 `Get Paginated Tasks (User-specific)`
@@ -250,7 +250,7 @@ GET    /api/admin/task/{id}
 GET    /api/admin/task-count
 
 DELETE /api/admin/delete-task/{id}
-
+```
 ### 📊 `Monitoring & Actuator`
 ```properties
 http://localhost:8080/actuator/health
@@ -260,7 +260,7 @@ http://localhost:8080/actuator/info
 http://localhost:8080/actuator/metrics
 
 http://localhost:8080/actuator/prometheus
-
+```
 ### 📒 `Swagger Docs`
 ```properties
 Enable Swagger in gatewayservice, userservice, and taskservice to visualize and test endpoints.
